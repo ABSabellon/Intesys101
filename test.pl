@@ -26,24 +26,24 @@ ask(name):-
 	read(name, ans4).
 
 hasPain(name, ans1):-
-	pain(ans1).
+	pain(name, ans1).
 
 symptomPain_appendicitis(name, ans2, age, ans3, ans4):-
-	isProgressive(ans2),
-	isChild(age),
-	isShifting(ans3),
-	isLocalized(ans4).
+	isProgressive(name, ans2),
+	isChild(name, age),
+	isShifting(name, ans3),
+	isLocalized(name, ans4).
 
-symptomPain_appendicitis(ans2, age, ans3, ans4):-
-	isProgressive(ans2),
-	isAdult(age),
-	isShifting(ans3),
-	isLocalized(ans4).
+symptomPain_appendicitis(name, ans2, age, ans3, ans4):-
+	isProgressive(name, ans2),
+	isAdult(name, age),
+	isShifting(name, ans3),
+	isLocalized(name, ans4).
 
-symptomPain_appendicitis(ans2, age, ans4):-
-	isProgressive(ans2),
-	isAdult(age),
-	isLocalized(ans4).
+symptomPain_appendicitis(name, ans2, age, ans4):-
+	isProgressive(name, ans2),
+	isAdult(name, age),
+	isLocalized(name, ans4).
 
 
 
