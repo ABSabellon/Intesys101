@@ -2,6 +2,8 @@ isChild(AGE):- AGE < 18.
 isAdult(AGE):- AGE = 18.
 isAdult(AGE):- AGE > 18.
 
+hasPain(true).
+
 begin():-
 	write('Greetings!'),nl,
 	write('Welcome to MD Expert System'),nl,
@@ -9,41 +11,61 @@ begin():-
 	write('about your patient, to identify'),nl,
 	write(' if he/she has Appendicitis or Cholecystitis'),nl,
 	write('Please Enter Patient Name: '),
-	read(name),
-	write('Let us Start'),
-	ask(name).
+	read(Name),
+	write('Let us Start'),nl,
+	ask(Name).
 
-ask(name):-
+ask(Name):-
 	write('What is your age?'),nl,
-	read(name, age),
+	read(Name, Age),
 	write('Does the patient experience pain?'),nl,
-	read(name, ans1),
+	read(Name, Ans1),
 	write('Is the pain progressive?'),nl,
-	read(name, ans2),
+	read(Name, Ans2),
 	write('Is the pain shifting?'),nl,
-	read(name, ans3),
+	read(Name, Ans3),
 	write('Is the pain localized?'),nl,
-	read(name, ans4).
+	read(Name, Ans4),
 
-hasPain(name, ans1):-
-	pain(name, ans1).
+	write('Test Results'),
+	(
+	    (
+	    hasPain(Name,Ans1),
+	    write('lelele', [NAME])
+	    ); 1=1
+	),
+	(
+	    (
+	    symptomPain_appendicitis(Name, Ans2, Age, Ans3, Ans4),
+	    write('lalala ', [NAME])
+	    ); 1=1
+	),
+	(
+	    (
+	    symptomPain_appendicitis(Name, Ans2, Age, Ans4),
+	    write('lolololo ', [NAME])
+	    ); 1=1
+	).
 
-symptomPain_appendicitis(name, ans2, age, ans3, ans4):-
-	isProgressive(name, ans2),
-	isChild(name, age),
-	isShifting(name, ans3),
-	isLocalized(name, ans4).
+hasPain(Name, Ans1):-
+	pain(Name, Ans1).
 
-symptomPain_appendicitis(name, ans2, age, ans3, ans4):-
-	isProgressive(name, ans2),
-	isAdult(name, age),
-	isShifting(name, ans3),
-	isLocalized(name, ans4).
+symptomPain_appendicitis(Name, Ans2, Age, Ans3, Ans4):-
+	isProgressive(Name, Ans2),
+	isChild(Name, Age),
+	isShifting(Name, Ans3),
+	isLocalized(Name, Ans4).
 
-symptomPain_appendicitis(name, ans2, age, ans4):-
-	isProgressive(name, ans2),
-	isAdult(name, age),
-	isLocalized(name, ans4).
+symptomPain_appendicitis(Name, Ans2, Age, Ans3, Ans4):-
+	isProgressive(Name, Ans2),
+	isAdult(Name, Age),
+	isShifting(Name, Ans3),
+	isLocalized(Name, Ans4).
+
+symptomPain_appendicitis(Name, Ans2, Age, Ans4):-
+	isProgressive(Name, Ans2),
+	isAdult(Name, Age),
+	isLocalized(Name, Ans4).
 
 
 
